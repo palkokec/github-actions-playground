@@ -1,0 +1,20 @@
+name: Smoke test
+on:
+  workflow_dispatch:
+jobs:
+  smoke-test-android:
+    runs-on: linux
+    steps:
+      - name: Fail step
+        continue-on-error: true
+        run: mvn clean test -Dfilename=smoke_test_runner_android.xml -DconfigProp=configurationSauceLabsAndroidPrivate.properties -DSL_URL=https://${SAUCE_LABS_USERNAME}:${SAUCE_LABS_PASSWORD}@ondemand.eu-central-1.saucelabs.com:443/wd/hub
+      - name: Next step
+        continue-on-error: true
+        run: echo "Next step"
+      - name: "notify failure"
+        if: failure()
+        run: echo "Failure"
+      - name: "notify complete"
+        if: success()
+        run: echo "Success"
+        
