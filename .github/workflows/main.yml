@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   smoke-test-android:
-    runs-on: linux
+    runs-on: ubuntu-latest
     steps:
       - name: Fail step
         continue-on-error: true
