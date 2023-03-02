@@ -1,12 +1,12 @@
-name: Smoke test
+name: Test fail steps
 on:
   workflow_dispatch:
 jobs:
-  smoke-test-android:
+  fail-steps-test:
     runs-on: ubuntu-latest
     steps:
       - name: Fail step
-        run: mvn clean test -Dfilename=smoke_test_runner_android.xml -DconfigProp=configurationSauceLabsAndroidPrivate.properties -DSL_URL=https://${SAUCE_LABS_USERNAME}:${SAUCE_LABS_PASSWORD}@ondemand.eu-central-1.saucelabs.com:443/wd/hub
+        run: mvn clean test
       - name: Next step
         if: always()
         run: echo "Next step"
