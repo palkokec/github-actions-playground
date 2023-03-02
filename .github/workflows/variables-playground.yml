@@ -12,3 +12,5 @@ jobs:
     steps:
       - name: Print env
         run: env
+      - name: Injected var value
+        run: echo $BUILDCACHE_LOG_FILE
