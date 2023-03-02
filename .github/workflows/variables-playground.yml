@@ -5,7 +5,7 @@ env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
   LC_ALL: 'en_US.UTF-8'
   LANG: 'en_US.UTF-8'
-  BUILDCACHE_LOG_FILE: $HOME/.buildcache.log
+  BUILDCACHE_LOG_FILE: ${{ env.HOME }}/.buildcache.log
 jobs:
   variables-playground:
     runs-on: ubuntu-latest
