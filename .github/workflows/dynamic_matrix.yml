@@ -11,13 +11,13 @@ jobs:
         id: generate-matrix
         run: |
           MODULES=(apple orange banana pear)
-          echo ::set-output name=modules::${MODULES}
+          "modules=${MODULES[@]}" >> $GITHUB_OUTPUT
   matrix-run:
     runs-on: ubuntu-latest
     needs: matrix-prepare
     strategy:
       matrix:
-        module: ${{ needs.matrix-prepare.outputs.modules }}
+        module: ${{ fromJSON(needs.matrix-prepare.outputs.modules) }}
     steps:
       - name: Test => (${{ matrix.module }})
         run: |
