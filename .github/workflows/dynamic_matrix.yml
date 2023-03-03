@@ -1,0 +1,25 @@
+name: Dynamic matrix
+on:
+  workflow_dispatch:
+jobs:
+  matrix-prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      modules: ${{ steps.generate-matrix.outputs.modules }}
+    steps:
+      - name: Generate matrix
+        id: generate-matrix
+        run: |
+          MODULES=(apple orange banana pear)
+          echo ::set-output name=modules::${MODULES}
+  matrix-run:
+    runs-on: ubuntu-latest
+    needs: matrix-prepare
+    strategy:
+      matrix:
+        module: ${{ needs.matrix-prepare.outputs.modules }}
+    steps:
+      - name: Test => (${{ matrix.module }})
+        run: |
+          echo ${{ matrix.module }}
+      
