@@ -11,7 +11,7 @@ jobs:
         id: generate-matrix
         run: |
           MODULES=(apple orange banana pear)
-          "modules=${MODULES[@]}" >> $GITHUB_OUTPUT
+          echo "modules=$(jq --compact-output --null-input '$ARGS.positional' --args -- \"${MODULES[@]}\")" >> $GITHUB_OUTPUT
   matrix-run:
     runs-on: ubuntu-latest
     needs: matrix-prepare
