@@ -20,7 +20,7 @@ jobs:
       matrix:
         module: ${{ fromJSON(needs.matrix-prepare.outputs.modules) }}
     steps:
-      - name: Test => (${{ matrix.module.name}})
+      - name: Test => (${{ fromJSON(matrix.module).name }})
         run: |
           echo ${{ matrix.module }}
       
