@@ -19,6 +19,7 @@ jobs:
     strategy:
       matrix:
         module: ${{ fromJSON(needs.matrix-prepare.outputs.modules) }}
+    name: Test => (${{ fromJSON(matrix.module).name }})
     steps:
       - name: Test => (${{ fromJSON(matrix.module).name }})
         run: |
