@@ -10,7 +10,7 @@ jobs:
       - name: Generate matrix
         id: generate-matrix
         run: |
-          MODULES=(apple orange banana pear)
+          MODULES=('{"fruit":"apple","name":"APPLE"}','{"fruit":"orange","name":"ORANGE"}' ,'{"fruit":"banana","name":"BANANA"}' ,'{"fruit":"pear","name":"PEAR"}' )
           echo "modules=$(jq --compact-output --null-input '$ARGS.positional' --args -- ${MODULES[@]})" >> $GITHUB_OUTPUT
   matrix-run:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
       matrix:
         module: ${{ fromJSON(needs.matrix-prepare.outputs.modules) }}
     steps:
-      - name: Test => (${{ matrix.module }})
+      - name: Test => (${{ matrix.module.name}})
         run: |
           echo ${{ matrix.module }}
       
