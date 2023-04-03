@@ -10,8 +10,9 @@ jobs:
       - name: Generate matrix
         id: generate-matrix
         run: |
-          MODULES=('{"fruit":"apple","name":"APPLE"}','{"fruit":"orange","name":"ORANGE"}' ,'{"fruit":"banana","name":"BANANA"}' ,'{"fruit":"pear","name":"PEAR"}' )
-          echo "modules=$(jq --compact-output --null-input '$ARGS.positional' --args -- ${MODULES[@]})" >> $GITHUB_OUTPUT
+          MODULES=['{"fruit":"apple","name":"APPLE"}','{"fruit":"orange","name":"ORANGE"}' ,'{"fruit":"banana","name":"BANANA"}' ,'{"fruit":"pear","name":"PEAR"}']
+          echo "modules=$MODULES" >> $GITHUB_OUTPUT
+          #echo "modules=$(jq --compact-output --null-input '$ARGS.positional' --args -- ${MODULES[@]})" >> $GITHUB_OUTPUT
   matrix-run:
     runs-on: ubuntu-latest
     needs: matrix-prepare
